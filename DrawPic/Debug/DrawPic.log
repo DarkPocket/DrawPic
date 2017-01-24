@@ -1,16 +1,10 @@
-﻿生成启动时间为 2017/1/24 21:43:58。
+﻿生成启动时间为 2017/1/24 22:25:18。
      1>项目“F:\codeSave\win32\DrawPic\DrawPic\DrawPic.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\DrawPic.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt DrawPic.cpp
          DrawPic.cpp
-     1>f:\codesave\win32\drawpic\drawpic\drawpic.cpp(443): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>f:\codesave\win32\drawpic\drawpic\drawpic.cpp(535): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
          c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
-     1>f:\codesave\win32\drawpic\drawpic\drawpic.cpp(450): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(1769): note: 参见“sprintf”的声明
-     1>f:\codesave\win32\drawpic\drawpic\drawpic.cpp(485): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
-       ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\DrawPic.res" DrawPic.rc 
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\codeSave\win32\DrawPic\Debug\DrawPic.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"F:\codeSave\win32\DrawPic\Debug\DrawPic.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\codeSave\win32\DrawPic\Debug\DrawPic.lib" /MACHINE:X86 Debug\DrawPic.res
          Debug\DrawPic.obj
@@ -20,4 +14,4 @@
 
 已成功生成。
 
-已用时间 00:00:01.22
+已用时间 00:00:01.05

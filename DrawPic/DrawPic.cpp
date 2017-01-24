@@ -1,6 +1,10 @@
 // DrawPic.cpp : 定义应用程序的入口点。
 //
 
+
+//打开bmp格式文件有问题
+
+
 #include "stdafx.h"
 #include "DrawPic.h"
 #include "list"
@@ -430,13 +434,63 @@ void SavePicFile()
 
 	if (GetSaveFileName(&ofn))
 	{
+		//保存bmp格式
+		HDC dc = GetDC(g_hWnd);
+
+		RECT rect;
+		GetClientRect(g_hWnd, &rect);
+
+		int wPic = rect.right - rect.left;
+		int hPic = rect.bottom - rect.top;
+
+		HBITMAP hBitmap = CreateCompatibleBitmap(dc, wPic, hPic);
+
+		HDC dcMem = CreateCompatibleDC(dc); //创建兼容dc
+		SelectObject(dcMem, hBitmap);
+
+		BitBlt(dcMem, 0, 0, wPic, hPic, dc,0, 0, SRCCOPY);
+
+		BITMAPFILEHEADER fileHead = { 0 }; //文件头
+		BITMAPINFOHEADER infoHead = { 0 };//信息头
+		DWORD  infoSize = wPic*hPic * 2; //图片信息
+		char *info = new char[infoSize];
+		memset(info, 0, infoSize);
+
+		//填充文件头
+		fileHead.bfType = 0x4d42;//"BM"
+		fileHead.bfSize = infoSize + sizeof(fileHead) + sizeof(infoHead);
+		fileHead.bfOffBits= sizeof(fileHead) + sizeof(infoHead);
+
+		//填充图片信息头
+		infoHead.biSize = sizeof(BITMAPINFOHEADER);
+		infoHead.biHeight = hPic;
+		infoHead.biWidth = wPic;
+		infoHead.biPlanes = 1;
+		infoHead.biBitCount = 16;
+		infoHead.biCompression = BI_RGB;
+		infoHead.biSizeImage = infoSize;
+		GetDIBits(dcMem, hBitmap, 0, hPic, info, (LPBITMAPINFO)&infoHead, DIB_RGB_COLORS);
+
+		size_t len = wcslen(ofn.lpstrFile) + 1;
+		size_t connerted = 0;
+		wcstombs_s(&connerted, strFileName, len, ofn.lpstrFile, _TRUNCATE);
+
+	HANDLE hFile=	CreateFileA(strFileName,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,0);
+	DWORD dwSize = 0;
+
+	WriteFile(hFile, &fileHead, sizeof(BITMAPFILEHEADER), &dwSize,0);
+	WriteFile(hFile, &infoHead, sizeof(BITMAPINFOHEADER), &dwSize, 0);
+	WriteFile(hFile,info, infoSize, &dwSize, 0);
+
+	CloseHandle(hFile);
+		return;
 		//char *p = (char*)fileName;
 
 		//for (int i = 0; i < lstrlen(ofn.lpstrFile); i++)
 		//{
 		//	strFileName[i] = *(p + i * 2);
 		//}
-	  	size_t len = wcslen(ofn.lpstrFile) + 1;
+/*	  	size_t len = wcslen(ofn.lpstrFile) + 1;
 		 	size_t connerted = 0;
 		 	wcstombs_s(&connerted, strFileName, len, ofn.lpstrFile, _TRUNCATE);
 			 
@@ -456,7 +510,7 @@ void SavePicFile()
 		}
 
 		fclose(pFile);
-
+		*/
 		//int a = 0;
 
 	}
